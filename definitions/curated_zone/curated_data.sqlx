@@ -1,6 +1,6 @@
 config {
     type: "table",
-    name: "curated"
+    name: "curated_data"
 }
 
   SELECT

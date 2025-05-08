@@ -1,0 +1,19 @@
+config {
+    type: "table",
+    name: "curated_transactions"
+}
+
+WITH prod_calc AS 
+( SELECT account_number, 
+SUM(CASE WHEN Personal_Loan = true THEN 1 ELSE 0 END + 
+CASE WHEN Securities_Account = true THEN 1 ELSE 0 END + 
+CASE WHEN CD_Account = true THEN 1 ELSE 0 END +  
+CASE WHEN Online = true THEN 1 ELSE 0 END +  
+CASE WHEN Credit_Card = true THEN 1 ELSE 0 END) as product_count 
+FROM ${ref("bankinfo")} AS b
+GROUP BY account_number)
+
+SELECT a.*, b.product_count 
+FROM ${ref("curated_data")} AS a
+LEFT JOIN prod_calc AS b
+ON a.account_number = b.account_number
