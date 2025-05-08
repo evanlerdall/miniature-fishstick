@@ -1,0 +1,6 @@
+{
+    "warehouse": "bigquery",
+    "defaultSchema": "landing_zone",
+    "defaultDatabase": "annie-l-advisory-project",
+    "defaultLocation": "US"
+}

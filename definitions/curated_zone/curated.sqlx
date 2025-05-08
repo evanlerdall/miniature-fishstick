@@ -1,0 +1,14 @@
+config {
+    type: "table",
+    name: "curated"
+}
+
+  SELECT
+    a.*,
+    b.* EXCEPT (account_number)
+  FROM
+    ${ref("transactions")} AS a
+  LEFT JOIN
+    ${ref("bankinfo")} AS b
+  ON
+    a.account_number=b.account_number
